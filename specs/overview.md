@@ -8,3 +8,6 @@ Each module spec defines:
 
 ## Modules
 - [System Status](./modules/system_status.md)
+- [API Contracts & Error Handling](./modules/api_contracts.md)
+- [AWS Cloud Infrastructure](./modules/aws_infrastructure.md)
+- [Mobile Client Application](./modules/mobile_client.md)

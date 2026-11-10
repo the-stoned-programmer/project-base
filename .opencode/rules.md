@@ -21,7 +21,11 @@ To preserve token economy and ensure velocity:
 - **Before completion:** Run `./scripts/verify.sh` (full clippy warnings-as-errors, unit tests, frontend linter, and Playwright smoke tests).
 - A task is NEVER done until `./scripts/verify.sh` succeeds with exit code `0`.
 
-### 4. Living Ledger Maintenance (`SYSTEM.md`)
+### 4. Environment & Secret Hygiene
+- If `.envrc` does not exist when setting up a fresh clone, run `./scripts/setup.sh` or copy `.envrc.example` to `.envrc`.
+- Never hardcode or commit secrets, account IDs, or access keys to version control. Always direct secret additions to `.envrc.local` or `.env.local`.
+
+### 5. Living Ledger Maintenance (`SYSTEM.md`)
 - As your final step before reporting completion to the operator, update `SYSTEM.md`:
   - Add or update the capability in the Capabilities table.
   - Document any updated contracts.
@@ -31,6 +35,7 @@ To preserve token economy and ensure velocity:
 
 ## Common Verification Commands
 ```bash
+./scripts/setup.sh           # One-command onboarding & dependency bootstrap
 ./scripts/sync-contracts.sh  # Generates TypeScript interfaces from Rust
 ./scripts/verify-fast.sh     # Fast type & syntax check (< 3s)
 ./scripts/verify.sh          # Full end-to-end verification suite

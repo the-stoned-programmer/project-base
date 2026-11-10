@@ -1,0 +1,8 @@
+{
+  "name": "modern-project-base",
+  "private": true,
+  "scripts": {
+    "check": "pnpm -r check",
+    "lint": "pnpm -r lint"
+  }
+}

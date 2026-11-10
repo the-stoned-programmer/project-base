@@ -10,8 +10,8 @@ echo "🚀 Starting Rust backend on http://127.0.0.1:3001..."
 cargo run --manifest-path "${ROOT_DIR}/backend/Cargo.toml" --bin server &
 BACKEND_PID=$!
 
-echo "🚀 Starting Vite frontend on http://127.0.0.1:5173..."
-(cd "${ROOT_DIR}/frontend" && pnpm run dev --host 127.0.0.1) &
+echo "🚀 Starting Vite Web app on http://127.0.0.1:5173..."
+(cd "${ROOT_DIR}/apps/web" && pnpm run dev --host 127.0.0.1) &
 FRONTEND_PID=$!
 
 cleanup() {

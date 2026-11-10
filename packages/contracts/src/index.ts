@@ -4,3 +4,5 @@
 // -----------------------------------------------------------------------------
 
 export type SystemStatus = { healthy: boolean, uptime_secs: number, version: string, environment: string, };
+
+export type ApiError = { status: number, code: string, message: string, details?: Record<string, unknown>, };

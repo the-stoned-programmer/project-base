@@ -7,8 +7,9 @@ echo "=================================================="
 echo "🛡️  RUNNING FULL VERIFICATION GATE"
 echo "=================================================="
 
-# 1. Sync contracts
+# 1. Sync and verify contracts
 "${ROOT_DIR}/scripts/sync-contracts.sh"
+"${ROOT_DIR}/scripts/sync-contracts.sh" --check
 
 # 2. Rust Clippy (Zero Warnings Allowed)
 echo "🦀 [Rust] Running Clippy with warnings as errors..."
@@ -18,17 +19,21 @@ cargo clippy --manifest-path "${ROOT_DIR}/backend/Cargo.toml" --all-targets -- -
 echo "🦀 [Rust] Running backend tests..."
 cargo test --manifest-path "${ROOT_DIR}/backend/Cargo.toml"
 
-# 4. Frontend Type Check
-echo "🎨 [Frontend] Running TypeScript compiler check..."
-(cd "${ROOT_DIR}/frontend" && pnpm check)
+# 4. Monorepo TypeScript Check (Contracts, Web, Mobile, Infra)
+echo "🎨 [Workspaces] Running TypeScript compiler across all projects..."
+(cd "${ROOT_DIR}" && pnpm -r check)
 
-# 5. Frontend Linter
-echo "🎨 [Frontend] Running ESLint..."
-(cd "${ROOT_DIR}/frontend" && pnpm lint)
+# 5. Monorepo Linter
+echo "🎨 [Workspaces] Running ESLint across all projects..."
+(cd "${ROOT_DIR}" && pnpm -r lint)
 
-# 6. E2E Browser Smoke Test (Playwright)
+# 6. AWS CDK Infrastructure Offline Synthesis
+echo "☁️  [Infra] Synthesizing AWS CDK CloudFormation templates..."
+(cd "${ROOT_DIR}" && pnpm --filter @modern/infra synth --quiet)
+
+# 7. E2E Browser Smoke Test (Playwright against Web & API)
 echo "🎭 [E2E] Running Playwright sensory smoke tests..."
-(cd "${ROOT_DIR}/frontend" && pnpm test:e2e)
+(cd "${ROOT_DIR}/apps/web" && pnpm test:e2e)
 
 echo "=================================================="
 echo "🎉 ALL VERIFICATION GATES PASSED (Exit Code: 0)"

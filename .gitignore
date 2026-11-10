@@ -3,18 +3,26 @@ backend/target/
 **/*.rs.bk
 Cargo.lock
 
-# Node / Frontend
+# Node / Monorepo Packages & Apps
 node_modules/
-frontend/node_modules/
-frontend/dist/
-frontend/build/
-frontend/.vite/
-frontend/test-results/
-frontend/playwright-report/
+**/node_modules/
+**/dist/
+**/build/
+**/.vite/
+**/test-results/
+**/playwright-report/
+.expo/
+**/.expo/
+
+# AWS CDK Output
+cdk.out/
+**/cdk.out/
 
 # Environment and secrets
 .env
 .env.local
+.envrc
+.envrc.local
 *.local
 
 # OS

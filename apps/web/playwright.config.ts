@@ -19,7 +19,7 @@ export default defineConfig({
   ],
   webServer: [
     {
-      command: 'cargo run --manifest-path ../backend/Cargo.toml --bin server',
+      command: 'cargo run --manifest-path ../../backend/Cargo.toml --bin server',
       url: 'http://127.0.0.1:3001/api/status',
       reuseExistingServer: !process.env.CI,
       timeout: 30000,

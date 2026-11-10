@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { fetchSystemStatus } from './lib/api';
-import type { SystemStatus } from './lib/contracts/api';
+import type { SystemStatus } from '@modern/contracts';
 import { Activity, CheckCircle2, AlertCircle, RefreshCw, Server, Terminal, Shield } from 'lucide-react';
 
 export function App() {
@@ -113,7 +113,7 @@ export function App() {
           <h3>Operator Feedback Invariant</h3>
         </div>
         <p className="text-sm text-slate-400 leading-relaxed">
-          This system verifies itself via deterministic pipelines. Any change to Rust backend models instantly projects into <code className="text-emerald-400 font-mono">src/lib/contracts/api.ts</code>. Frontend type safety is enforced by strict TypeScript compilation without human manual code review.
+          This system verifies itself via deterministic pipelines. Any change to Rust backend models instantly projects into <code className="text-emerald-400 font-mono">packages/contracts</code>. Frontend type safety is enforced by strict TypeScript compilation without human manual code review.
         </p>
       </div>
     </div>

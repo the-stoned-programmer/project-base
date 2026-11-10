@@ -1,0 +1,28 @@
+{
+  "name": "@modern/infra",
+  "version": "0.1.0",
+  "private": true,
+  "bin": {
+    "infra": "bin/app.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "check": "tsc --noEmit",
+    "lint": "eslint . --ext ts --report-unused-disable-directives --max-warnings 0",
+    "synth": "cdk synth",
+    "cdk": "cdk"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "^2.178.1",
+    "constructs": "^10.4.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.1",
+    "@typescript-eslint/eslint-plugin": "^8.24.0",
+    "@typescript-eslint/parser": "^8.24.0",
+    "aws-cdk": "^2.178.1",
+    "eslint": "^8.57.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
+}

@@ -1,0 +1,32 @@
+# ==============================================================================
+# Environment Configuration Template (direnv / operator shell)
+# ==============================================================================
+# Copy this file to `.envrc` for local development:
+#   cp .envrc.example .envrc
+#   direnv allow
+# ==============================================================================
+
+# Application Runtime
+export ENVIRONMENT="development"
+export PORT="3001"
+export VITE_API_URL="http://127.0.0.1:3001"
+
+# AWS Configuration & Credentials
+# Option A (Recommended): Named AWS Profile (SSO / IAM Identity Center)
+export AWS_PROFILE="default"
+export AWS_REGION="us-east-1"
+export AWS_DEFAULT_REGION="us-east-1"
+
+# Option B: Explicit Credentials (for CI or automated agent sandboxes)
+# export AWS_ACCESS_KEY_ID="your-access-key-id"
+# export AWS_SECRET_ACCESS_KEY="your-secret-access-key"
+# export AWS_SESSION_TOKEN="optional-session-token"
+
+# AWS CDK Target Account & Region
+export CDK_DEFAULT_ACCOUNT="" # e.g. "123456789012"
+export CDK_DEFAULT_REGION="us-east-1"
+
+# Local overrides (loads .envrc.local if present)
+if [ -f .envrc.local ]; then
+  source_env .envrc.local
+fi
