@@ -1,3 +1,5 @@
+import * as path from 'path';
+import * as fs from 'fs';
 import {
   Stack,
   StackProps,
@@ -8,6 +10,7 @@ import {
   aws_cloudfront as cloudfront,
   aws_cloudfront_origins as origins,
   aws_apprunner as apprunner,
+  aws_s3_deployment as s3deploy,
 } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 
@@ -114,7 +117,24 @@ export class ModernAppStack extends Stack {
 
     this.distributionDomain = distribution.distributionDomainName;
 
-    // 4. CloudFormation Outputs
+    // 4. Deploy Web Assets to S3 & Invalidate CloudFront Cache
+    const webDistPath = path.resolve(__dirname, '../../../apps/web/dist');
+    const webAssetSource =
+      fs.existsSync(webDistPath) && fs.readdirSync(webDistPath).length > 0
+        ? s3deploy.Source.asset(webDistPath)
+        : s3deploy.Source.data(
+            'index.html',
+            '<!DOCTYPE html><html><body>Placeholder for Modern Web App</body></html>'
+          );
+
+    new s3deploy.BucketDeployment(this, 'DeployWebAssets', {
+      sources: [webAssetSource],
+      destinationBucket: webBucket,
+      distribution,
+      distributionPaths: ['/*'],
+    });
+
+    // 5. CloudFormation Outputs
     new CfnOutput(this, 'DistributionDomain', {
       value: distribution.distributionDomainName,
       description: 'Primary application domain (HTTPS, Zero-CORS)',

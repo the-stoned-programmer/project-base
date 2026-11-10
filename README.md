@@ -44,6 +44,7 @@ modern-project-base/
     ├── sync-contracts.sh       # Exports Rust types -> packages/contracts
     ├── verify-fast.sh          # Tier 1: sub-second syntax & type check across all workspaces
     ├── verify.sh               # Tier 2: full gate (Clippy + Tests + Linters + CDK Synth + E2E)
+    ├── deploy.sh               # Platform-agnostic deploy to preview or production
     └── dev.sh                  # Starts backend & web frontend concurrently
 ```
 
@@ -108,7 +109,19 @@ To synthesize AWS CloudFormation templates:
 pnpm --filter @modern/infra synth
 ```
 
-### 3. Duplicating This Template For a New Project
+### 3. Deploying (Preview & Production)
+Deployments are platform-agnostic and self-contained within `./scripts/deploy.sh`:
+
+```bash
+# Deploy or rolling-update dedicated Preview environment:
+./scripts/deploy.sh preview
+
+# Deploy to Production:
+./scripts/deploy.sh production
+```
+The deploy pipeline enforces `./scripts/verify.sh` first, builds static web assets, deploys AWS CDK stacks, syncs assets to S3, and invalidates CloudFront.
+
+### 4. Duplicating This Template For a New Project
 ```bash
 cp -r /Users/toppenheimer/hacking/modern-project-base /Users/toppenheimer/hacking/my-new-app
 cd /Users/toppenheimer/hacking/my-new-app
