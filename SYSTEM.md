@@ -24,9 +24,9 @@
 | **Contract** | Rust -> TS Bridge & Registry | Active | Domain models sync to `packages/contracts/src/index.ts` via declarative `export_contracts!` macro; includes `--check` staleness guard. |
 | **Web** | Operator Dashboard | Active | Real-time status display polling backend health endpoint with automatic error boundary display. |
 | **Web** | Typed API Client | Active | `apiFetch` and `ApiClientError` in `apps/web/src/lib/api.ts` providing structured error extraction. |
-| **Mobile** | Mobile Status Cockpit | Active | React Native / Expo application (`apps/mobile`) importing `@modern/contracts` directly; verifies headlessly via `tsc`. |
+| **Mobile** | Mobile Status Cockpit | Active | React Native / Expo application (`apps/mobile`) importing `@modern/contracts` directly; configured with `eas.json` for OTA updates and store builds. |
 | **Infra** | AWS Cloud Infrastructure | Active | AWS CDK stack (`infra/`) provisioning private S3 web hosting via CloudFront OAC, AWS App Runner backend container, unified zero-CORS routing, and offline `cdk synth`. |
-| **Infra** | Platform-Agnostic Deployment | Active | `./scripts/deploy.sh [preview\|production]` builds web assets, verifies baseline, deploys CDK stacks, and syncs S3 with CloudFront invalidation. |
+| **Infra** | Unified Multi-Target Deployer | Active | `./scripts/deploy.sh [preview\|production]` builds web assets, verifies baseline, deploys CDK stacks, and triggers mobile OTA updates with non-blocking EAS auth fallback. |
 | **Testing** | Sensory E2E Smoke | Active | Playwright headless browser asserts Web UI + Axum API integration for both nominal and degraded error responses. |
 | **Tooling** | Operator Onboarding & Env Bootstrap | Active | `./scripts/setup.sh` validates toolchains, instantiates `.envrc` from `.envrc.example`, installs Playwright browsers, and verifies baseline. |
 

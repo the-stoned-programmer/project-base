@@ -9,7 +9,11 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "check": "tsc --noEmit",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "build:preview": "eas build --profile preview",
+    "build:production": "eas build --profile production",
+    "update:preview": "eas update --auto --channel preview",
+    "update:production": "eas update --auto --channel production"
   },
   "dependencies": {
     "@modern/contracts": "workspace:*",

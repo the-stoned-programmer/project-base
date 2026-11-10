@@ -94,15 +94,11 @@ This automatically:
 5. Executes the full verification suite.
 
 ### 2. Local Development
-To launch both the backend API (`http://127.0.0.1:3001`) and Web UI (`http://127.0.0.1:5173`) with live reload:
+To launch the entire platform concurrently (Rust Backend on `3001`, Vite Web on `5173`, and Expo Mobile bundler on `8081`):
 ```bash
 ./scripts/dev.sh
 ```
-
-To run the mobile app bundler:
-```bash
-pnpm --filter @modern/mobile start
-```
+*(Tip: pass `--no-mobile` if you only want Backend and Web)*.
 
 To synthesize AWS CloudFormation templates:
 ```bash
